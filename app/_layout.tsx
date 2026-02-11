@@ -11,9 +11,7 @@ import {
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import FloatingTabMain from '@/components/FloatingTab/Main';
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -24,7 +22,7 @@ export default function RootLayout() {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#EBF8FF' }}>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{ contentStyle: { backgroundColor: '#EBF7FF', paddingBottom: paddingB } }}>
-          <Stack.Screen name="modal" options={{ headerShown: false, title: 'Modal' }} />
+          <Stack.Screen name="index" options={{ headerShown: false, title: 'Home' }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>
