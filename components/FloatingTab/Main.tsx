@@ -19,13 +19,13 @@ export default function FloatingTabMain() {
         <FontAwesome name="home" size={26} color={`${pathName === '/' ? '#1E293' : '#747E82'}`} />
       </TouchableOpacity>
       <TouchableOpacity style={style.touch} onPress={() => router.replace('/block-list')} >
-        <FontAwesome name="list-ul" size={24} color={`${pathName === '/block-list' ? '#1E293' : '#747E82'}`} />
+        <FontAwesome name="list-ul" size={24} color={`${pathName.startsWith('/block-list') ? '#1E293' : '#747E82'}`} />
       </TouchableOpacity>
       <TouchableOpacity style={style.touch} onPress={() => router.replace('/schedule')} >
-        <Ionicons name="calendar-clear" size={24} color={`${pathName === '/schedule' ? '#1E293' : '#747E82'}`} />
+        <Ionicons name="calendar-clear" size={24} color={`${pathName.startsWith('/schedule') ? '#1E293' : '#747E82'}`} />
       </TouchableOpacity>
       <TouchableOpacity style={style.touch} onPress={() => router.replace('/journey')} >
-        <MaterialIcons name="landscape" size={32} color={`${pathName === '/journey' ? '#1E293' : '#747E82'}`} />
+        <MaterialIcons name="landscape" size={32} color={`${pathName.startsWith('/journey') ? '#1E293' : '#747E82'}`} />
       </TouchableOpacity>
     </View>
   )

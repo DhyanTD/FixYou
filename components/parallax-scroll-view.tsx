@@ -10,6 +10,7 @@ import Animated, {
 import { ThemedView } from '@/components/themed-view';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useThemeColor } from '@/hooks/use-theme-color';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const HEADER_HEIGHT = 250;
 
@@ -44,6 +45,10 @@ export default function ParallaxScrollView({
     };
   });
 
+  const insets = useSafeAreaInsets();
+  const paddingB = insets.bottom + 70 + 20; // adding this to maintain floating tab, 70 floating bar height, 20 just extra for safety  -ft dhyan
+
+
   return (
     <Animated.ScrollView
       ref={scrollRef}
@@ -57,7 +62,7 @@ export default function ParallaxScrollView({
         ]}>
         {headerImage}
       </Animated.View>
-      <ThemedView style={styles.content}>{children}</ThemedView>
+      <ThemedView style={{ ...styles.content, paddingBottom: paddingB }}>{children}</ThemedView>
     </Animated.ScrollView>
   );
 }
