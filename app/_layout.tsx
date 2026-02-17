@@ -27,6 +27,9 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <Stack screenOptions={{ contentStyle: { backgroundColor: '#EBF7FF' } }}>
           <Stack.Screen name="index" options={{ headerShown: false, title: 'Home' }} />
+          <Stack.Screen name="block-list/index" options={{ headerShown: false, title: 'Block List' }} />
+          <Stack.Screen name="journey/index" options={{ headerShown: false, title: 'Journey' }} />
+          <Stack.Screen name="schedule/index" options={{ headerShown: false, title: 'Schedule' }} />
         </Stack>
         <StatusBar style="auto" />
       </ThemeProvider>

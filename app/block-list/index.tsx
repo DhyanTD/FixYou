@@ -1,30 +1,17 @@
-import { Link } from 'expo-router';
 import { StyleSheet } from 'react-native';
+import BlockListMain from '@/components/BlockList/BlockListMain';
+import PaddedxScrollView from '@/components/padded-scroll-view';
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-
-export default function ModalScreen() {
+export default function BlockListScreen() {
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText type="title">This is a Block List</ThemedText>
-      <Link href="/" dismissTo style={styles.link}>
-        <ThemedText type="link">Go to home screen</ThemedText>
-      </Link>
-    </ThemedView>
+    <PaddedxScrollView addStyles={styles.scrollView}>
+      <BlockListMain />
+    </PaddedxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#EBF8FF',
+  scrollView: {
   },
-  link: {
-    marginTop: 15,
-    paddingVertical: 15,
-  },
+
 });
