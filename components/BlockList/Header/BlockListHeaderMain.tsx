@@ -11,7 +11,7 @@ export default function BlockListHeaderMain() {
     setSearch(e ?? '');
   }
   return (
-    <View >
+    <View style={{ marginTop: 20 }}>
       <View style={styles.container}>
         <View />
         <Text style={styles.header}>Block List</Text>
