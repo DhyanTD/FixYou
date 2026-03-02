@@ -1,15 +1,10 @@
 import { useEffect, useState } from 'react';
 import NativeInstalledApps from '../specs/NativeInstalledApps';
-import { AppItem } from '@/components/BlockList/AppCategoryList/AppRow';
 
 type App = {
-  appName: any;
+  appName: string;
   packageName: string;
   versionName: string;
-  id: string;
-  title: string;
-  apps: AppItem[];
-
 };
 
 export function useInstalledApps() {
@@ -25,10 +20,13 @@ export function useInstalledApps() {
     }
 
     NativeInstalledApps.getInstalledApps()
-      .then(setApps)
+      .then((installedApps) => {
+        console.log('Installed Apps:', JSON.stringify(installedApps));
+        setApps(installedApps);
+      })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
-  }, [NativeInstalledApps]);
+  }, []);
 
   return { apps, loading, error };
 }

@@ -1,65 +1,9 @@
-import { View } from 'react-native';
-import BlockListHeaderMain from './Header/BlockListHeaderMain';
+import { useInstalledApps } from '@/hooks/useInstalledApps';
+import { useEffect, useState } from 'react';
+import { ActivityIndicator, Text, View } from 'react-native';
 import AppCategoryListMain from './AppCategoryList/AppCategoryListMain';
 import { AppItem } from './AppCategoryList/AppRow';
-import { useEffect, useState } from 'react';
-import { useInstalledApps } from '@/hooks/useInstalledApps';
-
-const blockCategories = [
-  {
-    id: 'social',
-    title: 'SOCIAL',
-    apps: [
-      {
-        id: 'instagram',
-        name: 'Instagram',
-        icon: 'instagram',
-        usageTodayMinutes: 42,
-        isBlocked: true,
-      },
-      {
-        id: 'tiktok',
-        name: 'TikTok',
-        icon: 'tiktok',
-        usageTodayMinutes: 72,
-        isBlocked: true,
-      },
-    ],
-  },
-  {
-    id: 'gaming',
-    title: 'GAMING',
-    apps: [
-      {
-        id: 'roblox',
-        name: 'Roblox',
-        icon: 'roblox',
-        usageTodayMinutes: 30,
-        isBlocked: false,
-      },
-    ],
-  },
-  {
-    id: 'entertainment',
-    title: 'ENTERTAINMENT',
-    apps: [
-      {
-        id: 'youtube',
-        name: 'YouTube',
-        icon: 'youtube',
-        usageTodayMinutes: 125,
-        isBlocked: true,
-      },
-      {
-        id: 'netflix',
-        name: 'Netflix',
-        icon: 'netflix',
-        usageTodayMinutes: 0,
-        isBlocked: false,
-      },
-    ],
-  },
-]
+import BlockListHeaderMain from './Header/BlockListHeaderMain';
 
 export interface BlockCategory {
   id: string;
@@ -69,13 +13,28 @@ export interface BlockCategory {
 
 
 export default function BlockListMain() {
+  const { apps: installedApps, loading, error } = useInstalledApps();
+  const [categories, setCategories] = useState<BlockCategory[]>([]);
 
-  // const { apps, loading, error } = useInstalledApps();
+  useEffect(() => {
+    if (installedApps.length === 0) return;
 
-  // console.log('NativeModules:', apps, loading, error, apps.length)
+    const appItems: AppItem[] = installedApps.map((app) => ({
+      id: app.packageName,
+      name: app.appName,
+      icon: app.packageName,
+      usageTodayMinutes: 0,
+      isBlocked: false,
+    }));
 
-  // InstalledApps.getInstalledApps().then(console.log)
-  const [categories, setCategories] = useState<BlockCategory[]>(blockCategories);
+    setCategories([
+      {
+        id: 'installed',
+        title: 'INSTALLED APPS',
+        apps: appItems,
+      },
+    ]);
+  }, [installedApps]);
 
   const handleToggle = (categoryId: string, appId: string, value: boolean) => {
     setCategories((prev) =>
@@ -91,12 +50,26 @@ export default function BlockListMain() {
       )
     );
   };
-  // useEffect(() => {
-  //   // console.log('apps:', apps)
-  // }, [apps, loading, error])
-  console.log(categories);
+
+  if (loading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 64 }}>
+        <ActivityIndicator size="large" color="#64B5F6" />
+        <Text style={{ marginTop: 12, color: '#94A3B8', fontSize: 14 }}>Loading apps...</Text>
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 64 }}>
+        <Text style={{ color: '#EF4444', fontSize: 14 }}>{error}</Text>
+      </View>
+    );
+  }
+
   return (
-    <View >
+    <View>
       <BlockListHeaderMain />
       <View style={{ width: '90%', marginHorizontal: 'auto', marginTop: 32 }}>
         {categories.map((cat) => (
@@ -106,4 +79,3 @@ export default function BlockListMain() {
     </View>
   );
 }
-
