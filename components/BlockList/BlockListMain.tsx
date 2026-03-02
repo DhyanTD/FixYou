@@ -2,8 +2,8 @@ import { View } from 'react-native';
 import BlockListHeaderMain from './Header/BlockListHeaderMain';
 import AppCategoryListMain from './AppCategoryList/AppCategoryListMain';
 import { AppItem } from './AppCategoryList/AppRow';
-import { useState } from 'react';
-import { NativeModules } from 'react-native'
+import { useEffect, useState } from 'react';
+import { useInstalledApps } from '@/hooks/useInstalledApps';
 
 const blockCategories = [
   {
@@ -67,13 +67,14 @@ export interface BlockCategory {
   apps: AppItem[];
 }
 
-const { InstalledApps } = NativeModules
 
 export default function BlockListMain() {
 
-  console.log('NativeModules:', NativeModules, NativeModules.InstalledApps)
+  // const { apps, loading, error } = useInstalledApps();
 
-  InstalledApps.getInstalledApps().then(console.log)
+  // console.log('NativeModules:', apps, loading, error, apps.length)
+
+  // InstalledApps.getInstalledApps().then(console.log)
   const [categories, setCategories] = useState<BlockCategory[]>(blockCategories);
 
   const handleToggle = (categoryId: string, appId: string, value: boolean) => {
@@ -90,6 +91,9 @@ export default function BlockListMain() {
       )
     );
   };
+  // useEffect(() => {
+  //   // console.log('apps:', apps)
+  // }, [apps, loading, error])
   console.log(categories);
   return (
     <View >

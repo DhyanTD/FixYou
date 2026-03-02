@@ -12,6 +12,7 @@ export interface CategorySectionProps {
 }
 
 export default function AppCategoryListMain({ category, onToggle }: CategorySectionProps) {
+  // console.log('category:', category)
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>{category.title}</Text>

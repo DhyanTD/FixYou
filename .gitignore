@@ -39,5 +39,10 @@ yarn-error.*
 app-example
 
 # generated native folders
-/ios
 /android
+/ios
+
+# IDEs and metadata
+.vscode/
+.idea/
+.gemini/

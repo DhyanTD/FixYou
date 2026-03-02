@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.dhyan-td.FixYou"
+      "bundleIdentifier": "com.dhyan_td.FixYou"
     },
     "android": {
       "adaptiveIcon": {

@@ -10,6 +10,15 @@
     "web": "expo start --web",
     "lint": "expo lint"
   },
+  "codegenConfig": {
+    "name": "AppSpecs",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.dhyan_td.FixYou"
+    }
+  },
+
   "dependencies": {
     "@expo-google-fonts/inter": "^0.4.2",
     "@expo-google-fonts/playfair-display": "^0.4.2",
